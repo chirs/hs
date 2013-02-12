@@ -1,0 +1,43 @@
+  html { height: 100% }
+  body { height: 100%; margin: 0px; padding: 0px }
+  #map_canvas { height: 100% }
+
+
+#subway_time {
+  background: white;
+  position: fixed;
+  z-index: 1000;
+  height: 100px;
+  width: 280px;
+  bottom: 10px;
+  left: 100px;
+  padding: 5px;
+  border: 3px solid #ccc;
+  font-size: 4em;
+}
+
+#map_controls p {
+  padding: 0;
+  margin: 2px;
+}
+  
+
+label {
+  width: 100px;
+  display: block;
+  float: left;
+}
+
+input {
+  width: 150px;
+}
+
+#page_nav {
+    margin-left: 160px;
+
+}
+
+.hidden {
+    visibility: hidden;
+}
+	
