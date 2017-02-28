@@ -65,7 +65,7 @@ def parse_routes():
         rid, aid, route_short, route, description, rtype, url, color, text_color = l
         return {
             'rid': rid,
-            'route': route,
+            'name': route_short,
             'description': description,
             'rtype': rtype,
             'url': url,
@@ -105,6 +105,43 @@ def parse_shapes():
     return d.items()
 
 
+
+def parse_stops():
+    
+    def process_item(l):
+        sid, _, stop_name, _, lat, lng, _, _, _, parent = l
+        return {
+            'sid': sid,
+            'name': stop_name,
+            'lat': lat,
+            'lng': lng,
+            'parent': parent,
+            }
+    
+    f = open(os.path.join(DATA_DIR, "google/stops.txt"))
+    r = csv.reader(f, delimiter=',')
+    r.next() # Skip header.
+    return [process_item(e) for e in r]
+
+
+
+
+def parse_stop_times():
+    
+    def process_item(l):
+        trip_id, arrival_time, departure_time, stop_id, stop_sequence, _, _, _, _
+        return {
+            'sid': trip_id,
+            'arrival_time': arrival_time,
+            'departure_time': departure_time,
+            'stop_id': stop_id,
+            'stop_sequence': stop_sequence,
+            }
+    
+    f = open(os.path.join(DATA_DIR, "google/stop_times.txt"))
+    r = csv.reader(f, delimiter=',')
+    r.next() # Skip header.
+    return [process_item(e) for e in r]
 
 def parse_trips():
 
@@ -148,12 +185,15 @@ def parse_service_calendar():
     
 
 if __name__ == "__main__":
-    print parse_shapes()
+    #print parse_stops()
+    #print parse_routes()
+
+    #print parse_shapes()
 
     #print parse_stations()
 
     #print parse_trips()
     #print parse_agencies()
-    #print parse_routes()
+
 
     #print parse_service_calendar()

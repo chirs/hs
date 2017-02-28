@@ -2,8 +2,24 @@ function initialize() {
 
 
   var currentTime = new Date();
-  //alert(startTime.getHours() + ":" + startTime.getMinutes());
   updateTime(currentTime);
+  
+
+  function updateTime(t){
+    var ts = t.getHours() + ":" + t.getMinutes();
+    $("#subway_time").html(ts)
+  };
+
+  function adjustDate(d, minutes){
+    return new Date(d.getTime() + minutes * 60000);
+  };
+
+  function incrementTime(){
+    currentTime = adjustDate(currentTime, 1);
+    updateTime(currentTime);
+  };
+
+  setInterval(incrementTime, 1000)
   
 
   var markers = [];
@@ -48,19 +64,6 @@ function initialize() {
 
   };
 
-  function updateTime(t){
-    var ts = t.getHours() + ":" + t.getMinutes();
-    $("#subway_time").html(ts)
-  };
-
-  function adjustDate(d, minutes){
-    return new Date(d.getTime() + minutes * 60000);
-  };
-
-  function incrementTime(){
-    currentTime = adjustDate(currentTime, 1);
-    updateTime(currentTime);
-  };
 
 
   function get_stops(){
@@ -68,7 +71,7 @@ function initialize() {
       stations = data.stations;
   	  for (var i = 0; i < stations.length; i++){
 		var e = stations[i];
-		create_marker(e.lat, e.lng, e.station); 
+		create_marker(e.lat, e.lng, e.name); 
 	    };
     });
   };
@@ -95,13 +98,12 @@ function initialize() {
 	};
     };
 
-  //get_stops();
+  get_stops();
 
   //get_tweets();
   //create_marker(41.9, 12.5, "I quit. - Pope");
   //create_route([[41.9, 12.5], [50.9, 40.2]]);
   get_routes();
-  setInterval(incrementTime, 1000)
 
 }
 

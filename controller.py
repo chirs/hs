@@ -23,13 +23,14 @@ def pope():
 
 @app.route("/subway")
 def subway_index():
-    return render_template("subway/index.html")
+    #return render_template("subway/open.html")
+    return render_template("subway/google.html")
 
 
 @app.route("/subway/stations")
 def subway_stations():
     from subway import parse
-    return jsonify(stations=parse.parse_stations())
+    return jsonify(stations=parse.parse_stops())
 
 
 
